@@ -1,5 +1,4 @@
-package 대회준비용;
-
+package stdDraw;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -75,7 +74,7 @@ public class servers2 {
 			int atpointY = (int) (Math.random()*A);
 			//if location is O , 
 			if(Sarray[atpointX][atpointY]=="O") {
-				Sarray[atpointX][atpointY]="@";	
+				Sarray[atpointX][atpointY]="8";	
 			//Attack Other	
 
 			} else i--;
@@ -95,7 +94,7 @@ public class servers2 {
 	public void AttackCheck() {
 		for(int i = 0 ; i<Sarray.length ;i++) {
 			for(int j = 0 ; j<Sarray.length ; j++) {
-				if(Sarray[i][j]=="@") {
+				if(Sarray[i][j]=="@"||Sarray[i][j]=="8") {
 					Sarray[i][j]="X";
 				}
 			}
@@ -222,10 +221,30 @@ public void BFS(){
 			GetCheck1();
 			BFS();
 			SumServer();
-			
+			double min = 0 ; 
+			double max = Sarray.length;
+			StdDraw.clear();
+			StdDraw.setScale(min-(max/5),max+(max/5));
 			for(int i = 0 ; i<Sarray.length ; i++) {
 				for(int j = 0 ; j<Sarray.length ; j++) {
 					System.out.print(Sarray[i][j]);
+					//해당 노드가 까만색일 경우
+					if(Sarray[i][j].equals("O")) {
+						StdDraw.setPenColor(StdDraw.BLACK);
+						StdDraw.filledSquare(j, max-i, 0.5);
+					
+					}else if(Sarray[i][j].equals("X")) {
+						StdDraw.setPenColor(StdDraw.RED);
+						StdDraw.filledSquare(j, max-i, 0.5);
+					
+					}else if(Sarray[i][j].equals("@")) {
+						StdDraw.setPenColor(StdDraw.ORANGE);
+						StdDraw.filledSquare(j, max-i, 0.5);
+					
+					}else if(Sarray[i][j].equals("8")) {
+						StdDraw.setPenColor(StdDraw.YELLOW);
+						StdDraw.filledSquare(j, max-i, 0.5);
+					}
 				}
 				System.out.println();
 			}
